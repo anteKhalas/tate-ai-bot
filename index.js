@@ -1,5 +1,7 @@
 const TelegramBot = require('node-telegram-bot-api');
 const axios = require('axios');
+const { config } = require('dotenv');
+config();
 
 // Replace 'YOUR_TELEGRAM_BOT_TOKEN' with the token you got from BotFather
 const token = '7411299270:AAEuIL-_I3m-V5YE5jRsQKJpaCY6FUv4sMQ';
@@ -8,7 +10,7 @@ const token = '7411299270:AAEuIL-_I3m-V5YE5jRsQKJpaCY6FUv4sMQ';
 const bot = new TelegramBot(token, { polling: true });
 console.log("Bot:", bot);
 // Replace 'YOUR_CHANNEL_ID' with your channel ID where you want to send messages
-const chatId = '-4265968246';
+const chatId = process.env.CHAT_ID;
 
 const fs = require('fs');
 
@@ -71,7 +73,7 @@ bot.on('message', (msg, metadata) => {
 console.log("Bot listening for new messages...");
 
 async function callGPT4oAndrewTate(prompt) {
-  const apiKey = 'sk-proj-ckR6SNetMmrFfgkRUMyAT3BlbkFJxTB7YaJMJWyPC1X1jv9O';  // Replace with your actual OpenAI API key
+  const apiKey = process.env.GPT4_API_KEY;  // Replace with your actual OpenAI API key
   const endpoint = 'https://api.openai.com/v1/chat/completions';
   const systemPrompt = "You need to talk exactly like Andrew Tate.\n\nSpeak like him. Be short, aggressive, confident.\n\nRespond in voice like natural language where you emphasize words like this:\nBasically it's gonna work like this, very simple. I am telling you very simple. So! You just type in slash tate, and then your prompt and then my voice will be generated automatically. WE SENDIN' IT OR WHAT??!?\n";
 
